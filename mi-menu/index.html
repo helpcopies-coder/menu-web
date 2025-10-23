@@ -1,0 +1,137 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Menú con Submenús Desplegables</title>
+<style>
+  body {
+    margin: 0;
+    font-family: Arial, sans-serif;
+    background-color: #fff;
+  }
+
+  nav {
+    background-color: white;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+  }
+
+  .menu {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex;
+    justify-content: center;
+  }
+
+  .menu > li {
+    position: relative;
+  }
+
+  .menu > li > a {
+    display: block;
+    padding: 14px 25px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .menu > li > a:hover {
+    background-color: #e0e0e0;
+    color: #000;
+  }
+
+  .submenu {
+    display: none;
+    position: absolute;
+    background-color: white;
+    min-width: 200px;
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    z-index: 1000;
+  }
+
+  .submenu li a {
+    display: block;
+    padding: 10px 20px;
+    text-decoration: none;
+    color: #333;
+    transition: background-color 0.3s, color 0.3s;
+  }
+
+  .submenu li a:hover {
+    background-color: #e0e0e0;
+    color: #000;
+  }
+
+  .menu li.show > .submenu {
+    display: block;
+  }
+
+  .menu li a {
+    cursor: pointer;
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <ul class="menu">
+    <li><a href="#">Inicio</a></li>
+
+    <li>
+      <a onclick="toggleMenu(event)">Alquiler ▾</a>
+      <ul class="submenu">
+        <li><a href="#">Impresoras color</a></li>
+        <li><a href="#">Impresoras blanco y negro</a></li>
+        <li><a href="#">Impresoras de producción</a></li>
+        <li><a href="#">Plotters</a></li>
+      </ul>
+    </li>
+
+    <li>
+      <a onclick="toggleMenu(event)">Ventas ▾</a>
+      <ul class="submenu">
+        <li><a href="#">Equipos color</a></li>
+        <li><a href="#">Blanco y negro</a></li>
+        <li><a href="#">Producción</a></li>
+      </ul>
+    </li>
+
+    <li>
+      <a onclick="toggleMenu(event)">Insumos ▾</a>
+      <ul class="submenu">
+        <li><a href="#">Papel</a></li>
+        <li><a href="#">Papel especial</a></li>
+        <li><a href="#">Toner</a></li>
+        <li><a href="#">Cartuchos de tinta</a></li>
+      </ul>
+    </li>
+
+    <li><a href="#">Nosotros</a></li>
+    <li><a href="#">Contacto</a></li>
+  </ul>
+</nav>
+
+<script>
+  function toggleMenu(event) {
+    const parentLi = event.target.parentElement;
+    const allMenus = document.querySelectorAll('.menu li');
+    allMenus.forEach(li => {
+      if (li !== parentLi) li.classList.remove('show');
+    });
+    parentLi.classList.toggle('show');
+  }
+
+  document.addEventListener('click', function(e) {
+    const isMenu = e.target.closest('.menu');
+    if (!isMenu) {
+      document.querySelectorAll('.menu li').forEach(li => li.classList.remove('show'));
+    }
+  });
+</script>
+
+</body>
+</html>
